@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-nvim="$HOME/.nvim"
+nvim="$HOME/.config/nvim"
 repos="https://github.com/jimzhan/nvim"
 config=$HOME/.config
 
@@ -19,20 +19,20 @@ success() {
 # ------------------------------
 # ensure there is a global config folder.
 # ------------------------------
-if [ ! -d $config/nvim ]; then
-    mkdir -p $config/nvim
+if [ ! -d $config ]; then
+    mkdir -p $config
 fi
 
 
 # ------------------------------
 # backup/unlink existing nvim if any.
 # ------------------------------
-if [ -L $config/nvim/init.vim ]; then
-    unlink $config/nvim/init.vim
-    info "existing NeoVim#init.vim unlinked"
-elif [ -f $config/nvim/init.vim ]; then
-    mv $config/nvim/init.vim $config/nvim/init.vim.bak
-    info "init.vim => init.vim.bak"
+if [ -L $config/nvim ]; then
+    unlink $config/nvim
+    info "[neovim] existing config unlinked"
+elif [ -d $config/nvim ]; then
+    mv $config/nvim $config/nvim.bak
+    info "nvim => nvim.bak"
 fi
 
 
@@ -41,10 +41,6 @@ fi
 if [ ! -d $nvim ]; then
     info "Setting up NeoVim..."
     git clone $repos $nvim
-    ln -s $nvim/init.vim $HOME/.config/nvim/init.vim
     mkdir $nvim/tmp
     success "NeoVim is ready to launch now"
-else
-    cd $nvim && git pull -v
-    success "NeoVim is now updated"
 fi
