@@ -23,7 +23,8 @@ let g:dotvim.tempdir = g:dotvim.root . "/tmp/"
 let g:dotvim.plugins = {}
 let g:dotvim.plugins.initialized = 1
 
-source g:dotvim.root/functions.vim
+source $HOME/.config/nvim/functions.vim
+
 
 " ---------------------------------------------------------------------------
 "  General
