@@ -1,4 +1,4 @@
-""  ------------------------------------------------------------
+" ------------------------------------------------------------
 " *  @author     Jim Zhan <jim.zhan@me.com>
 " *
 " Copyright © 2015 Jim Zhan.
@@ -137,41 +137,6 @@ endfunction
 " e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
 command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
 
-
-" ---------------------------------------------------------------------------
-"  Python: indent Python in the Google's way.
-" ---------------------------------------------------------------------------
-setlocal indentexpr=GetGooglePythonIndent(v:lnum)
-let s:maxoff = 50 " maximum number of lines to look backwards.
-function dotvim.GetGooglePythonIndent(lnum)
-
-  " Indent inside parens.
-  " Align with the open paren unless it is at the end of the line.
-  " E.g.
-  "   open_paren_not_at_EOL(100,
-  "                         (200,
-  "                          300),
-  "                         400)
-  "   open_paren_at_EOL(
-  "       100, 200, 300, 400)
-  call cursor(a:lnum, 1)
-  let [par_line, par_col] = searchpairpos('(\|{\|\[', '', ')\|}\|\]', 'bW',
-        \ "line('.') < " . (a:lnum - s:maxoff) . " ? dummy :"
-        \ . " synIDattr(synID(line('.'), col('.'), 1), 'name')"
-        \ . " =~ '\\(Comment\\|String\\)$'")
-  if par_line > 0
-    call cursor(par_line, 1)
-    if par_col != col("$") - 1
-      return par_col
-    endif
-  endif
-
-  " Delegate the rest to the original function.
-  return dotvim.GetPythonIndent(a:lnum)
-endfunction
-
-let pyindent_nested_paren="&sw*2"
-let pyindent_open_paren="&sw*2"
 
 " ---------------------------------------------------------------------------
 "  Logger: debug logger..
