@@ -322,3 +322,6 @@ Plug 'aperezdc/vim-template' " {
   "let g:ultisnips_python_style = google"     " Available Styles: doxygen | sphinx | google
 "}
 "Plug 'rizzatti/dash.vim'
+
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
