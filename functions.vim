@@ -159,7 +159,7 @@ endfunction
 " ---------------------------------------------------------------------------
 function! dotvim.InitializePlugins()
   if !filereadable(expand('$HOME/.config/nvim/autoload/plug.vim'))
-    echo "[*] Installing Vim-Plug..."
+    echo "[*] Installing Vim-Plug...\n"
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let g:dotvim.plugins.initialized = 0
   endif
