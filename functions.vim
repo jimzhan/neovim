@@ -200,7 +200,7 @@ function! dotvim.InitializePlugins()
   endif
 
   call plug#begin(expand('~/.config/nvim/plugins'))
-  source ~/.nvim/plugins.vim
+  source ~/.config/nvim/plugins.vim
   call plug#end()
 
   if g:dotvim.plugins.initialized == 0
