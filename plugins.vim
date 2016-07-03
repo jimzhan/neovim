@@ -61,8 +61,7 @@ Plug 'scrooloose/nerdtree' | Plug 'jistr/vim-nerdtree-tabs' "{
   autocmd FileType NERDTree nmap <buffer> <silent><Leader>c   m-c
   autocmd FileType NERDTree nmap <buffer> <silent><Leader>m   m-m
 "}
-
-
+"
 " ---------------------------------------------------------------------------
 Plug 'Shougo/neomru.vim' | Plug 'Shougo/unite.vim' "{
   let g:unite_prompt              = '➤ '
@@ -109,6 +108,35 @@ Plug 'Shougo/neomru.vim' | Plug 'Shougo/unite.vim' "{
 
 
 " ---------------------------------------------------------------------------
+"  Plugins: Color Themes
+" ---------------------------------------------------------------------------
+Plug 'chriskempson/base16-vim' "{
+  let base16colorspace=256
+"}
+Plug 'altercation/vim-colors-solarized'
+
+
+" ---------------------------------------------------------------------------
+"  Plugins: GIT Manager
+" ---------------------------------------------------------------------------
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter' "{
+  nnoremap <silent> <leader>gs :Gstatus<CR>
+  nnoremap <silent> <leader>gd :Gdiff<CR>
+  nnoremap <silent> <leader>gc :Gcommit<CR>
+  nnoremap <silent> <leader>gb :Gblame<CR>
+  nnoremap <silent> <leader>gl :Glog<CR>
+  nnoremap <silent> <leader>gp :Git push<CR>
+  nnoremap <silent> <leader>gw :Gwrite<CR>
+  nnoremap <silent> <leader>gr :Gremove<CR>
+  autocmd BufReadPost Fugitive://* set bufhidden=delete
+  " Instead of reverting the cursor to the last position in the buffer, we
+  " set it to the first line when editing a git commit message
+  au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+"}
+
+
+" ---------------------------------------------------------------------------
 "  Plugins: Comment Helper
 " ---------------------------------------------------------------------------
 Plug 'scrooloose/nerdcommenter'
@@ -122,6 +150,70 @@ Plug 'vim-airline/vim-airline-themes' | Plug 'vim-airline/vim-airline' "{
   let g:airline_theme='murmur'
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#fnamemod = ':t'
+"}
+
+
+" ---------------------------------------------------------------------------
+"  Plugins: Source Code Tags
+" ---------------------------------------------------------------------------
+if executable('ctags') "{{
+  Plug 'majutsushi/tagbar'
+  let g:tagbar_width=30
+  "autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx,*.go call tagbar#autoopen()
+  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+  " If using go please install the gotags program using the following
+  " go install github.com/jstemmer/gotags
+  " And make sure gotags is in your path
+  if executable('gotags')
+    let g:tagbar_type_go = {
+\     'ctagstype' : 'go',
+\     'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
+\                   't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
+\                   'r:constructor', 'f:functions' ],
+\     'sro' : '.',
+\     'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
+\     'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
+\     'ctagsbin'  : 'gotags',
+\     'ctagsargs' : '-sort -silent'
+\   }
+  endif
+endif
+"}}
+
+
+" ---------------------------------------------------------------------------
+"  Plugins: Languages
+" ---------------------------------------------------------------------------
+Plug 'fatih/vim-go' "{
+  let g:go_fmt_autosave = 1
+  let g:go_fmt_command = "goimports"
+  let g:go_disable_autoinstall = 0
+  nnoremap <silent> <leader>bb :GoInstall<CR>
+"}
+" ---------------------------------------------------------------------------
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-markdown' "{
+  au BufRead,BufNewFile *.md set filetype=markdown
+"}
+"
+" ---------------------------------------------------------------------------
+Plug 'othree/html5.vim'
+Plug 'lepture/vim-jinja'
+au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+" ---------------------------------------------------------------------------
+Plug 'mxw/vim-jsx' | Plug 'pangloss/vim-javascript' "{
+  let g:jsx_ext_required = 1
+  let g:jsx_pragma_required = 0
+"}
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'underscore,react'
+" ---------------------------------------------------------------------------
+Plug 'groenewege/vim-less'
+Plug 'leafgarland/typescript-vim'
+Plug 'clausreinke/typescript-tools.vim'
+Plug 'vim-scripts/hybris-ImpEx' "{
+  au BufRead,BufNewFile *.impex set filetype=impex
 "}
 
 
@@ -219,7 +311,7 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' } "{
 "}
 " ---------------------------------------------------------------------------
 Plug 'aperezdc/vim-template' " {
-  let g:templates_directory = expand('~/.vim/templates')
+  let g:templates_directory = expand('~/.config/nvim/templates')
 "}
 "Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips' " {
   "let g:UltiSnipsEditSplit="vertical"
@@ -227,15 +319,6 @@ Plug 'aperezdc/vim-template' " {
   "let g:UltiSnipsJumpForwardTrigger="<TAB>"
   "let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
   "let g:UltiSnipsRemoveSelectModeMappings = 0
-  "let g:ultisnips_python_style = google     " Available Styles: doxygen | sphinx | google
+  "let g:ultisnips_python_style = google"     " Available Styles: doxygen | sphinx | google
 "}
-
-
-
-" ---------------------------------------------------------------------------
-"  Plugins: Color Themes
-" ---------------------------------------------------------------------------
-Plug 'chriskempson/base16-vim' "{
-  let base16colorspace=256
-"}
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+"Plug 'rizzatti/dash.vim'
