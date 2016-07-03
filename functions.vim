@@ -1,7 +1,7 @@
 ""  ------------------------------------------------------------
 " *  @author     Jim Zhan <jim.zhan@me.com>
 " *
-" Copyright © 2016 Jim Zhan.
+" Copyright © 2015 Jim Zhan.
 " ------------------------------------------------------------
 " Licensed under the Apache License, Version 2.0 (the "License");
 " you may not use this file except in compliance with the License.
@@ -86,13 +86,116 @@ function! dotvim.Initialize()
   endif
 endfunction
 
+
+function! dotvim.RestoreCursor()
+  function! ResCur()
+    if line("'\"") <= line("$")
+      normal! g`"
+      return 1
+    endif
+  endfunction
+
+  augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+  augroup END
+endfunction
+
+
+" Strip whitespace
+function! dotvim.StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " do the business:
+    %s/\s\+$//e
+    " clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Shell command
+function! s:RunShellCommand(cmdline)
+    botright new
+
+    setlocal buftype=nofile
+    setlocal bufhidden=delete
+    setlocal nobuflisted
+    setlocal noswapfile
+    setlocal nowrap
+    setlocal filetype=shell
+    setlocal syntax=shell
+
+    call setline(1, a:cmdline)
+    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
+    execute 'silent $read !' . escape(a:cmdline, '%#')
+    setlocal nomodifiable
+    1
+endfunction
+
+" e.g. Grep current file for <search_term>: Shell grep -Hn <search_term> %
+command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
+
+
+" ---------------------------------------------------------------------------
+"  Python: indent Python in the Google's way.
+" ---------------------------------------------------------------------------
+setlocal indentexpr=GetGooglePythonIndent(v:lnum)
+let s:maxoff = 50 " maximum number of lines to look backwards.
+function dotvim.GetGooglePythonIndent(lnum)
+
+  " Indent inside parens.
+  " Align with the open paren unless it is at the end of the line.
+  " E.g.
+  "   open_paren_not_at_EOL(100,
+  "                         (200,
+  "                          300),
+  "                         400)
+  "   open_paren_at_EOL(
+  "       100, 200, 300, 400)
+  call cursor(a:lnum, 1)
+  let [par_line, par_col] = searchpairpos('(\|{\|\[', '', ')\|}\|\]', 'bW',
+        \ "line('.') < " . (a:lnum - s:maxoff) . " ? dummy :"
+        \ . " synIDattr(synID(line('.'), col('.'), 1), 'name')"
+        \ . " =~ '\\(Comment\\|String\\)$'")
+  if par_line > 0
+    call cursor(par_line, 1)
+    if par_col != col("$") - 1
+      return par_col
+    endif
+  endif
+
+  " Delegate the rest to the original function.
+  return dotvim.GetPythonIndent(a:lnum)
+endfunction
+
+let pyindent_nested_paren="&sw*2"
+let pyindent_open_paren="&sw*2"
+
+" ---------------------------------------------------------------------------
+"  Logger: debug logger..
+" ---------------------------------------------------------------------------
+function! dotvim.log(msg, ...)
+    let is_unite = get(a:000, 0, 0)
+    let msg = type(a:msg) == type([]) ? a:msg : split(a:msg, '\n')
+    call extend(s:log, msg)
+
+    if !(&filetype == 'unite' || is_unite)
+        call neobundle#util#redraw_echo(msg)
+    endif
+
+    call s:append_log_file(msg)
+endfunction
+
+
 " ---------------------------------------------------------------------------
 "  Plugin Manager: Initialize vim-plug to manage plugins.
 " ---------------------------------------------------------------------------
 function! dotvim.InitializePlugins()
-  if !filereadable(expand('~/.config/nvim/autoload/plug.vim'))
+  if !filereadable(expand('$HOME/.nvim/autoload/plug.vim'))
     echo "[*] Installing Vim-Plug..."
-    !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     let g:dotvim.plugins.initialized = 0
   endif
 
@@ -104,6 +207,30 @@ function! dotvim.InitializePlugins()
     :PlugInstall
   endif
 endfunction
+
+" ---------------------------------------------------------------------------
+function! dotvim.SyntasticESlintChecker()
+  let l:npm_bin = ''
+  let l:eslint = 'eslint'
+
+  if executable('npm')
+      let l:npm_bin = split(system('npm bin'), '\n')[0]
+  endif
+
+  if strlen(l:npm_bin) && executable(l:npm_bin . '/eslint')
+    let l:eslint = l:npm_bin . '/eslint'
+  endif
+
+  let b:syntastic_javascript_eslint_exec = l:eslint
+endfunction
+
+" Make the ErrorSign of Syntastic in red along with default background color.
+function! dotvim.ResetSyntasticColors()
+  exec 'hi SyntasticErrorSign guifg=#FF0000 ctermfg=196' .
+        \' guibg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'gui') .
+        \' ctermbg=' . synIDattr(synIDtrans(hlID('SignColumn')), 'bg', 'cterm')
+endfunction
+" ---------------------------------------------------------------------------
 
 
 " ---------------------------------------------------------------------------

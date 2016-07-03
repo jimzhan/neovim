@@ -77,8 +77,8 @@ endif
 set background=dark             " Assume a dark background
 set t_Co=256                    " Enable 256 colors (stop CSApprox warning and make xterm vim shine)
 set tabpagemax=15               " Only show 15 tabs
-"set showmode                   " Display the current mode
-"set cursorline                 " Highlight current line
+set showmode                   " Display the current mode
+set cursorline                 " Highlight current line
 set colorcolumn=100             " Enable Vertical Color Column at 80.
 if has('gui_running')
   set shell=/bin/bash           " Use basic bash ONLY.
