@@ -112,7 +112,6 @@ Plug 'Shougo/neomru.vim' | Plug 'Shougo/unite.vim' "{
 " ---------------------------------------------------------------------------
 Plug 'chriskempson/base16-vim' "{
   let base16colorspace=256
-  colorscheme base16-solarized-dark
 "}
 Plug 'altercation/vim-colors-solarized'
 

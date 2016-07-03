@@ -203,4 +203,5 @@ call g:dotvim.InitializePlugins()
 " ---------------------------------------------------------------------------
 "  Local Settings
 " ---------------------------------------------------------------------------
+colorscheme base16-solarized-dark
 call g:dotvim.ResetSyntasticColors()
