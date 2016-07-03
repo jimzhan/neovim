@@ -221,13 +221,13 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' } "{
 Plug 'aperezdc/vim-template' " {
   let g:templates_directory = expand('~/.vim/templates')
 "}
-Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips' " {
-  let g:UltiSnipsEditSplit="vertical"
-  let g:UltiSnipsExpandTrigger="<TAB>"
-  let g:UltiSnipsJumpForwardTrigger="<TAB>"
-  let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-  let g:UltiSnipsRemoveSelectModeMappings = 0
-  let g:ultisnips_python_style = "google"     " Available Styles: doxygen | sphinx | google
+"Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips' " {
+  "let g:UltiSnipsEditSplit="vertical"
+  "let g:UltiSnipsExpandTrigger="<TAB>"
+  "let g:UltiSnipsJumpForwardTrigger="<TAB>"
+  "let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
+  "let g:UltiSnipsRemoveSelectModeMappings = 0
+  "let g:ultisnips_python_style = google     " Available Styles: doxygen | sphinx | google
 "}
 
 
