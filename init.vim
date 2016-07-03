@@ -202,7 +202,5 @@ call g:dotvim.InitializePlugins()
 " ---------------------------------------------------------------------------
 "  Local Settings
 " ---------------------------------------------------------------------------
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colorscheme solarized
+colorscheme base16-solarized-dark
 "call g:dotvim.ResetSyntasticColors()
