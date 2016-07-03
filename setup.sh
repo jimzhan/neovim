@@ -27,10 +27,10 @@ fi
 # ------------------------------
 # backup/unlink existing nvim if any.
 # ------------------------------
-if [ -L $config/nvim/init.vim]; then
+if [ -L $config/nvim/init.vim ]; then
     unlink $config/nvim/init.vim
     info "existing NeoVim#init.vim unlinked"
-elif [ -f $config/nvim/init.vim]; then
+elif [ -f $config/nvim/init.vim ]; then
     mv $config/nvim/init.vim $config/nvim/init.vim.bak
     info "init.vim => init.vim.bak"
 fi
