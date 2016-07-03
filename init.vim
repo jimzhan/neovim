@@ -17,12 +17,13 @@
 " ---------------------------------------------------------------------------
 "  Settings
 " ---------------------------------------------------------------------------
-let g:nvim = {}
-let g:nvim.root = $HOME . "/.nvim/"
-let g:nvim.tempdir = $HOME . "/.nvim/tmp/"
-let g:nvim.plugins = {}
-let g:nvim.plugins.initialized = 1
-"source $HOME/.nvim/functions.vim
+let g:dotvim = {}
+let g:dotvim.root = $HOME . "/.nvim/"
+let g:dotvim.tempdir = $HOME . "/.config/nvim/tmp/"
+let g:dotvim.plugins = {}
+let g:dotvim.plugins.initialized = 1
+source $HOME/.nvim/functions.vim
+
 
 " ---------------------------------------------------------------------------
 "  General
@@ -60,7 +61,7 @@ set ffs=unix,dos
 " ---------------------------------------------------------------------------
 "  let g:dotvim.no_views = 1
 " ---------------------------------------------------------------------------
-if !exists('g:nvim.no_views')
+if !exists('g:dotvim.no_views')
   " Add exclusions to mkview and loadview
   " eg: *.*, svn-commit.tmp
   let g:skipview_files = [
@@ -190,3 +191,18 @@ else
 " Use consistent way to call out the shell
     cmap sh terminal
 endif
+
+
+" ---------------------------------------------------------------------------
+" Plugins Manager: Setup Custom Plugins Support.
+" ---------------------------------------------------------------------------
+call g:dotvim.InitializePlugins()
+
+
+" ---------------------------------------------------------------------------
+"  Local Settings
+" ---------------------------------------------------------------------------
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set background=dark
+colorscheme solarized
+call g:dotvim.ResetSyntasticColors()
