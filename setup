@@ -39,7 +39,7 @@ fi
 # clone/update from remote repos
 # ------------------------------
 if [ ! -d $nvim ]; then
-    info "Setting up NeoVim..."
+    info "Setting up NeoVim...\n"
     git clone $repos $nvim
     mkdir $nvim/tmp
     success "NeoVim is ready to launch now"
