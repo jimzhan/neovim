@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 nvim="$HOME/.config/nvim"
-repos="https://github.com/jimzhan/nvim"
+repos="https://github.com/jimzhan/neovim"
 config=$HOME/.config
 
 info() {
