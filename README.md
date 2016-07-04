@@ -36,7 +36,7 @@ Install
 Run the following line from your terminal
 
 ```sh
-curl -s https://raw.githubusercontent.com/jimzhan/nvim/master/setup | sh
+curl -s https://raw.githubusercontent.com/jimzhan/neovim/master/setup | sh
 ```
 
 
