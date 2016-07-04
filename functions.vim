@@ -158,20 +158,20 @@ endfunction
 "  Plugin Manager: Initialize dein.vim to manage plugins.
 " ---------------------------------------------------------------------------
 function! dotvim.InitializePlugins()
-  if !isdirectory('$HOME/.config/nvim/exts')
+  if !isdirectory(expand('~/.config/nvim/repos'))
     echo "[*] Installing dein.vim...\n"
-    silent !curl -s https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s $HOME/.config/nvim/exts
-    let g:dotvim.plugins.initialized = 0
+    silent !curl -s https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s $HOME/.config/nvim
   endif
 
-  set runtimepath^=$HOME/.config/nvim/exts/dein/repos/github.com/Shougo/dein.vim
+  set runtimepath^=~/.config/nvim/repos/github.com/Shougo/dein.vim
 
-  call dein#begin(expand('$HOME/.config/nvim/exts'))
+  call dein#begin(expand('~/.config/nvim'))
     source ~/.config/nvim/plugins.vim
   call dein#end()
+  filetype plugin indent on
 
-  if g:dotvim.plugins.initialized == 0
-    :PlugInstall
+  if dein#check_install()
+    call dein#install()
   endif
 endfunction
 
