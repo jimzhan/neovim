@@ -289,26 +289,17 @@ Plug 'sjl/gundo.vim' "{
 " ---------------------------------------------------------------------------
 "  AutoComplete: AutoComplete & Code Snippets/Templates
 " ---------------------------------------------------------------------------
-Plug 'Shougo/neocomplete' "{
-  set completeopt-=preview
-  " Disable AutoComplPop.
-  let g:acp_enableAtStartup = 0
-  let g:neocomplete#enable_at_startup       = 1
-  let g:neocomplete#enable_smart_case       = 1
-  let g:neocomplete#enable_ignore_case      = 1
-  let g:neocomplete#enable_fuzzy_completion = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-  inoremap <expr><TAB>    pumvisible() ? "\<C-n>" : "\<TAB>"
-  inoremap <expr><CR>     pumvisible() ? neocomplete#close_popup() : "\<CR>"
-  if !exists('g:neocomplete#omni_patterns')
-    let g:neocomplete#omni_patterns = {}
-  endif
-  let g:neocomplete#omni_patterns.go = '\h\w*\.\?'
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') } "{
+  let g:deoplete#enable_at_startup = 1
+  " deoplete tab-complete
+  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  " tern
+  autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' } "{
-  autocmd FileType javascript nested setlocal omnifunc=javascriptcomplete#CompleteJS
-"}
+
 " ---------------------------------------------------------------------------
 Plug 'aperezdc/vim-template' " {
   let g:templates_directory = expand('~/.config/nvim/templates')
