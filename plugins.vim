@@ -310,18 +310,8 @@ Plug 'marijnh/tern_for_vim', { 'do': 'npm install' } "{
   autocmd FileType javascript nested setlocal omnifunc=javascriptcomplete#CompleteJS
 "}
 " ---------------------------------------------------------------------------
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 Plug 'aperezdc/vim-template' " {
   let g:templates_directory = expand('~/.config/nvim/templates')
 "}
-"Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips' " {
-  "let g:UltiSnipsEditSplit="vertical"
-  "let g:UltiSnipsExpandTrigger="<TAB>"
-  "let g:UltiSnipsJumpForwardTrigger="<TAB>"
-  "let g:UltiSnipsJumpBackwardTrigger="<S-TAB>"
-  "let g:UltiSnipsRemoveSelectModeMappings = 0
-  "let g:ultisnips_python_style = google"     " Available Styles: doxygen | sphinx | google
-"}
-"Plug 'rizzatti/dash.vim'
-
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
