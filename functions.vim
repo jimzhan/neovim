@@ -155,23 +155,26 @@ endfunction
 
 
 " ---------------------------------------------------------------------------
-"  Plugin Manager: Initialize vim-plug to manage plugins.
+"  Plugin Manager: Initialize dein.vim to manage plugins.
 " ---------------------------------------------------------------------------
 function! dotvim.InitializePlugins()
-  if !filereadable(expand('$HOME/.config/nvim/autoload/plug.vim'))
-    echo "[*] Installing Vim-Plug...\n"
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  if !isdirectory('$HOME/.config/nvim/exts')
+    echo "[*] Installing dein.vim...\n"
+    silent !curl -s https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s $HOME/.config/nvim/exts
     let g:dotvim.plugins.initialized = 0
   endif
 
-  call plug#begin(expand('~/.config/nvim/plugins'))
-  source ~/.config/nvim/plugins.vim
-  call plug#end()
+  set runtimepath^=$HOME/.config/nvim/exts/dein/repos/github.com/Shougo/dein.vim
+
+  call dein#begin(expand('$HOME/.config/nvim/exts'))
+    source ~/.config/nvim/plugins.vim
+  call dein#end()
 
   if g:dotvim.plugins.initialized == 0
     :PlugInstall
   endif
 endfunction
+
 
 " ---------------------------------------------------------------------------
 function! dotvim.SyntasticESlintChecker()
