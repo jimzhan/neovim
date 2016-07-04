@@ -43,7 +43,7 @@ curl -s https://raw.githubusercontent.com/jimzhan/nvim/master/setup | sh
 Preview
 =======
 
-![Vim with VimFiler + Tagbar Opened](previews/dotvim.png)
+![Vim with VimFiler + Tagbar Opened](https://raw.githubusercontent.com/jimzhan/.vim/master/previews/dotvim.png)
 
 
 
