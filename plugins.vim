@@ -305,6 +305,13 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') } "{
   autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "}
 
+Plug 'zchee/deoplete-jedi'
+let g:python_host_prog='/usr/local/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3'
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+
 " ---------------------------------------------------------------------------
 Plug 'aperezdc/vim-template' " {
   let g:templates_directory = expand('~/.config/nvim/templates')
