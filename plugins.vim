@@ -103,7 +103,9 @@ Plug 'Shougo/vimfiler.vim' "{
   autocmd FileType vimfiler nmap <buffer> u   <Plug>(vimfiler_switch_to_parent_directory)
   autocmd FileType vimfiler nmap <buffer> <Leader>n           <Plug>(vimfiler_new_file)
   autocmd FileType vimfiler nmap <buffer> <silent><Leader>r   <Plug>(vimfiler_rename_file)
+  autocmd FileType vimfiler nmap <buffer> <silent><Leader>c   <Plug>(vimfiler_copy_file)
   autocmd FileType vimfiler nmap <buffer> <silent><Leader>m   <Plug>(vimfiler_move_file)
+  autocmd FileType vimfiler nmap <buffer> <silent><Leader>p   <Plug>(vimfiler_clipboard_paste)
   "autocmd FileType vimfiler nmap <buffer> <Leader><m-k>       <Plug>(vimfiler_make_directory)
 
   nnoremap <C-o> :VimFilerExplorer -parent -toggle -status -split -simple -winwidth=39 -no-quit<CR>
