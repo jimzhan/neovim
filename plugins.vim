@@ -273,12 +273,18 @@ Plug 'mattn/emmet-vim' "{
 "}
 Plug 'terryma/vim-multiple-cursors' "{
 function! Multiple_cursors_before()
-  exe 'NeoCompleteLock'
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+  let g:deoplete#disable_auto_complete = 1
   echo 'Disabled autocomplete'
 endfunction
 
 function! Multiple_cursors_after()
-  exe 'NeoCompleteUnlock'
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+  let g:deoplete#disable_auto_complete = 0
   echo 'Enabled autocomplete'
 endfunction
 "}
