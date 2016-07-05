@@ -173,9 +173,9 @@ nmap <leader>8 :set foldlevel=8<CR>
 nmap <leader>9 :set foldlevel=9<CR>
 " Buffer Switching
 " ----------------
-:nmap <C-l>     :bnext<CR>
-:nmap <C-h>     :bprevious<CR>
-:nmap <C-k>     :Bdelete<CR>
+:nmap <s-l>     :bnext<CR>
+:nmap <s-h>     :bprevious<CR>
+:nmap <s-k>     :Bdelete<CR>
 " System Clipboard
 " ----------------
 vmap <Leader>y "+y
