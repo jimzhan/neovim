@@ -297,12 +297,26 @@ Plug 'sjl/gundo.vim' "{
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
+
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+Plug 'artur-shaik/vim-javacomplete2'
+
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') } "{
   let g:deoplete#enable_at_startup = 1
   " deoplete tab-complete
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
   " tern
   autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+  let g:deoplete#omni_patterns = {}
+  let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_completion_start_length = 2
+  let g:deoplete#sources = {}
+  let g:deoplete#sources._ = []
+  let g:deoplete#file#enable_buffer_path = 1
 "}
 
 Plug 'zchee/deoplete-jedi'
