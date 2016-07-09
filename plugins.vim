@@ -213,8 +213,6 @@ Plug 'tpope/vim-markdown' "{
 "
 " ---------------------------------------------------------------------------
 Plug 'othree/html5.vim'
-Plug 'lepture/vim-jinja'
-au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 " ---------------------------------------------------------------------------
 Plug 'mxw/vim-jsx' | Plug 'pangloss/vim-javascript' "{
   let g:jsx_ext_required = 1
@@ -347,6 +345,7 @@ Plug 'aperezdc/vim-template' " {
   let g:templates_directory = expand('~/.config/nvim/templates')
 "}
 Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips' " {
+  let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
   let g:UltiSnipsEditSplit="vertical"
   let g:UltiSnipsExpandTrigger="<TAB>"
   let g:UltiSnipsJumpForwardTrigger="<TAB>"
