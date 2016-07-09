@@ -29,6 +29,14 @@ Plug 'Shougo/vimshell.vim' | Plug 'Shougo/vimproc.vim', { 'do': 'make' } "{
 
 
 " ---------------------------------------------------------------------------
+"  Plugins: Terminal
+" ---------------------------------------------------------------------------
+Plug 'kassio/neoterm'
+"let g:neoterm_position = 'horizontal'
+"let g:neoterm_automap_keys = ',tt'
+
+
+" ---------------------------------------------------------------------------
 "  Plugins: File Manager
 " ---------------------------------------------------------------------------
 Plug 'Shougo/neomru.vim' | Plug 'Shougo/unite.vim' "{
@@ -108,7 +116,7 @@ Plug 'Shougo/vimfiler.vim' "{
   autocmd FileType vimfiler nmap <buffer> <silent><Leader>p   <Plug>(vimfiler_clipboard_paste)
   "autocmd FileType vimfiler nmap <buffer> <Leader><m-k>       <Plug>(vimfiler_make_directory)
 
-  nnoremap <C-o> :VimFilerExplorer -parent -toggle -status -split -simple -winwidth=39 -no-quit<CR>
+  nnoremap <C-o> :VimFilerExplorer -parent -toggle -status -split -simple -winwidth=50 -no-quit<CR>
 "}
 
 " ---------------------------------------------------------------------------

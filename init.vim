@@ -22,8 +22,12 @@ let g:dotvim.root = $HOME . "/.config/nvim/"
 let g:dotvim.tempdir = g:dotvim.root . "/tmp/"
 let g:dotvim.plugins = {}
 let g:dotvim.plugins.initialized = 1
-
 source $HOME/.config/nvim/functions.vim
+" ---------------------------------------------------------------------------
+"  NeoVim ONLY
+" ---------------------------------------------------------------------------
+let g:neoterm_shell = "zsh"
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 
 " ---------------------------------------------------------------------------
